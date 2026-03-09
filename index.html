@@ -337,6 +337,70 @@
     }
 
     /* ════════════════════════════════
+       3-DAY SCHEDULE
+    ════════════════════════════════ */
+    .schedule-bg {
+      background: linear-gradient(160deg, var(--cream) 0%, var(--cream-dark) 100%);
+    }
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px; margin-top: 44px;
+    }
+    .day-card {
+      background: var(--cream);
+      border: 1px solid var(--gold-light);
+      border-radius: 16px; overflow: hidden;
+      box-shadow: 0 4px 24px rgba(90,62,43,.08);
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
+    .day-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(201,168,76,.16);
+    }
+    .day-header {
+      background: linear-gradient(135deg, var(--brown) 0%, #3e2412 100%);
+      padding: 22px 24px 18px; text-align: center; position: relative;
+    }
+    .day-header::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .day-number {
+      font-family: 'EB Garamond', serif;
+      font-size: .68rem; letter-spacing: .45em; text-transform: uppercase;
+      color: var(--gold-light); margin-bottom: 4px;
+    }
+    .day-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(1.6rem,4vw,2.1rem); color: var(--gold); line-height: 1.1;
+    }
+    .day-date-time {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .88rem; color: rgba(253,248,240,.65); margin-top: 6px;
+    }
+    .day-body { padding: 24px; }
+    .timeline { list-style: none; }
+    .timeline li {
+      display: flex; gap: 14px; align-items: flex-start;
+      padding: 10px 0; border-bottom: 1px dashed rgba(201,168,76,.2);
+    }
+    .timeline li:last-child { border-bottom: none; }
+    .tl-icon {
+      font-size: 1.1rem; flex-shrink: 0;
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--gold-pale); border-radius: 50%;
+    }
+    .tl-text { flex: 1; }
+    .tl-time {
+      font-size: .65rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gold-dark); font-family: 'EB Garamond', serif;
+    }
+    .tl-label { font-size: 1rem; color: var(--brown); line-height: 1.4; }
+
+    /* ════════════════════════════════
        DETAILS
     ════════════════════════════════ */
     .details-grid {
@@ -702,7 +766,7 @@
     <span class="bd-dot tr"></span>
     <span class="bd-dot bl"></span>
     <span class="bd-dot br"></span>
-    <div class="day-num">02</div>
+    <div class="day-num">01–03</div>
     <div class="month-year">May &nbsp;·&nbsp; 2026</div>
   </div>
 
@@ -814,25 +878,142 @@
   </div>
 </div>
 
+<!-- ═══════════════════════════════ 3-DAY SCHEDULE ═══════════════════════════════ -->
+<div class="schedule-bg">
+  <div class="section-wrap">
+    <p class="section-label reveal">Three days of celebration</p>
+    <h2 class="section-title reveal">Wedding Celebrations</h2>
+    <div class="gold-rule reveal"><span>✦</span></div>
+    <p class="reveal" style="font-size:1.15rem;color:#6b5040;font-style:italic;max-width:620px;margin:0 auto;">
+      We are overjoyed to share this special milestone and would be honoured by your presence across these three joyful days.
+    </p>
+    <div class="days-grid reveal">
+
+      <!-- Day 1 -->
+      <div class="day-card">
+        <div class="day-header">
+          <div class="day-number">Day One &nbsp;·&nbsp; 1st May 2026</div>
+          <div class="day-title">Gaye Holud</div>
+          <div class="day-date-time">🌿 Haldi Ceremony &nbsp;·&nbsp; 3:00 PM</div>
+        </div>
+        <div class="day-body">
+          <ul class="timeline">
+            <li>
+              <span class="tl-icon">🌿</span>
+              <div class="tl-text"><div class="tl-time">3:00 PM</div><div class="tl-label">Guests Arrive &amp; Welcome</div></div>
+            </li>
+            <li>
+              <span class="tl-icon">💛</span>
+              <div class="tl-text"><div class="tl-time">3:30 PM</div><div class="tl-label">Haldi / Turmeric Ceremony</div></div>
+            </li>
+            <li>
+              <span class="tl-icon">🎵</span>
+              <div class="tl-text"><div class="tl-time">4:30 PM</div><div class="tl-label">Music, Dance &amp; Celebration</div></div>
+            </li>
+            <li>
+              <span class="tl-icon">📸</span>
+              <div class="tl-text"><div class="tl-time">5:30 PM</div><div class="tl-label">Photography Session</div></div>
+            </li>
+            <li>
+              <span class="tl-icon">🍽️</span>
+              <div class="tl-text"><div class="tl-time">7:00 PM</div><div class="tl-label">Evening Feast &amp; Refreshments</div></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Day 2 -->
+      <div class="day-card">
+        <div class="day-header">
+          <div class="day-number">Day Two &nbsp;·&nbsp; 2nd May 2026</div>
+          <div class="day-title">The Wedding</div>
+          <div class="day-date-time">💍 Nikah Ceremony &nbsp;·&nbsp; 12:00 Noon</div>
+        </div>
+        <div class="day-body">
+          <ul class="timeline">
+            <li>
+              <span class="tl-icon">🕌</span>
+              <div class="tl-text"><div class="tl-time">11:00 AM</div><div class="tl-label">Guests Arrive &amp; Seating</div></div>
+            </li>
+            <li>
+              <span class="tl-icon">💍</span>
+              <div class="tl-text"><div class="tl-time">12:00 PM</div><div class="tl-label">Nikah / Akad Ceremony</div></div>
+            </li>
+            <li>
+              <span class="tl-icon">🤲</span>
+              <div class="tl-text"><div class="tl-time">1:00 PM</div><div class="tl-label">Dua &amp; Blessings from Elders</div></div>
+            </li>
+            <li>
+              <span class="tl-icon">📸</span>
+              <div class="tl-text"><div class="tl-time">1:30 PM</div><div class="tl-label">Family &amp; Couple Photography</div></div>
+            </li>
+            <li>
+              <span class="tl-icon">🍽️</span>
+              <div class="tl-text"><div class="tl-time">2:30 PM</div><div class="tl-label">Wedding Feast — Walima</div></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Day 3 -->
+      <div class="day-card">
+        <div class="day-header">
+          <div class="day-number">Day Three &nbsp;·&nbsp; 3rd May 2026</div>
+          <div class="day-title">Reception</div>
+          <div class="day-date-time">🌸 Reception Ceremony &nbsp;·&nbsp; 12:00 Noon</div>
+        </div>
+        <div class="day-body">
+          <ul class="timeline">
+            <li>
+              <span class="tl-icon">🌸</span>
+              <div class="tl-text"><div class="tl-time">12:00 PM</div><div class="tl-label">Grand Welcome Reception</div></div>
+            </li>
+            <li>
+              <span class="tl-icon">👑</span>
+              <div class="tl-text"><div class="tl-time">1:00 PM</div><div class="tl-label">Introduction of the Couple</div></div>
+            </li>
+            <li>
+              <span class="tl-icon">🎤</span>
+              <div class="tl-text"><div class="tl-time">1:30 PM</div><div class="tl-label">Speeches &amp; Well Wishes</div></div>
+            </li>
+            <li>
+              <span class="tl-icon">🎶</span>
+              <div class="tl-text"><div class="tl-time">2:30 PM</div><div class="tl-label">Cultural Program &amp; Entertainment</div></div>
+            </li>
+            <li>
+              <span class="tl-icon">🍽️</span>
+              <div class="tl-text"><div class="tl-time">4:00 PM</div><div class="tl-label">Reception Dinner &amp; Celebration</div></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════════════════════════ DETAILS ═══════════════════════════════ -->
 <div>
   <div class="section-wrap">
-    <p class="section-label reveal">Mark your calendar</p>
-    <h2 class="section-title reveal">Wedding Details</h2>
+    <p class="section-label reveal">Find us here</p>
+    <h2 class="section-title reveal">Venue</h2>
     <div class="gold-rule reveal"><span>✦</span></div>
-    <p class="reveal" style="font-size:1.15rem;color:#6b5040;font-style:italic;max-width:600px;margin:0 auto 8px;">
-      We are overjoyed to share this special milestone and would be honoured by your presence as we begin our journey together.
-    </p>
-    <div class="details-grid reveal">
-      <div class="detail-card">
-        <span class="icon">🕛</span>
-        <h3>Ceremony Time</h3>
-        <p><strong>12:00 Noon</strong>Saturday, 2nd May 2026</p>
-      </div>
-      <div class="detail-card">
+    <div class="details-grid reveal" style="max-width:600px;margin:0 auto;">
+      <div class="detail-card" style="text-align:center;">
         <span class="icon">📍</span>
-        <h3>Venue</h3>
+        <h3>Marriage Hall</h3>
         <p><strong>Katiahat</strong>Wedding Hall &amp; Grounds</p>
+        <a href="https://maps.app.goo.gl/bhq4D6nzBE9Y3qbX7" target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:8px;margin-top:18px;
+                  background:var(--gold);color:#fff;text-decoration:none;
+                  font-family:'EB Garamond',serif;font-size:.82rem;letter-spacing:.2em;
+                  text-transform:uppercase;padding:11px 24px;border-radius:50px;
+                  transition:background .25s,transform .25s;"
+           onmouseover="this.style.background='#a07830';this.style.transform='translateY(-3px)'"
+           onmouseout="this.style.background='var(--gold)';this.style.transform='translateY(0)'">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Open in Google Maps
+        </a>
       </div>
     </div>
   </div>
@@ -845,9 +1026,9 @@
     <div class="quote-inner reveal">
       <span class="quote-icon">"</span>
       <blockquote>
-        And He placed between you affection and mercy. Indeed in that are signs for a people who give thought.
+        And among His signs is that He created for you from yourselves mates that you may find tranquility in them; and He placed between you affection and mercy.
       </blockquote>
-      <cite>— Quran 30:21</cite>
+      <cite>— Surah Ar-Rum, Quran 30:21</cite>
     </div>
     <div class="gold-rule reveal" style="margin-top:40px;"><span>✦</span></div>
   </div>
@@ -861,20 +1042,22 @@
     <div class="gold-rule reveal"><span>✦</span></div>
     <div class="family-columns reveal">
       <div class="family-col">
-        <span class="f-name">Sneha</span>
+        <span class="f-name">Sneha Tabassum</span>
         <span class="f-role">The Bride</span>
         <p>
           <span class="parent-name">Daughter of</span>
-          her beloved father &amp; mother
+          Alfazur Rahaman<br/>
+          &amp; Dalia Nashrin
         </p>
       </div>
       <div class="family-div"><span>❧</span></div>
       <div class="family-col">
-        <span class="f-name">Ezaz</span>
+        <span class="f-name">Ezaz Hossain</span>
         <span class="f-role">The Groom</span>
         <p>
           <span class="parent-name">Son of</span>
-          his beloved father &amp; mother
+          Rabiul Islam<br/>
+          &amp; Habiba Sultana
         </p>
       </div>
     </div>
@@ -926,7 +1109,7 @@
     <circle cx="167" cy="167" r="2.5" fill="#e8b4b8"/>
   </svg>
   <span class="footer-names">Sneha &amp; Ezaz</span>
-  <p class="footer-date">2nd May 2026 &nbsp;·&nbsp; Katiahat</p>
+  <p class="footer-date">1st – 3rd May 2026 &nbsp;·&nbsp; Katiahat</p>
   <p class="footer-love">Made with ♥ for our special day</p>
 </footer>
 
@@ -956,7 +1139,7 @@
   })();
 
   (function() {
-    const target = new Date('2026-05-02T12:00:00');
+    const target = new Date('2026-05-01T15:00:00');
     function pad(n) { return String(n).padStart(2,'0'); }
     function update() {
       const diff = target - new Date();
@@ -983,11 +1166,17 @@
   const INVITE_URL = 'https://ezaznitd.github.io/wedding-invitation/';
   const WA_MSG = encodeURIComponent(
     '🌸 *Wedding Invitation* 🌸\n\n' +
+    'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم\n\n' +
     'With the blessings of Allah, we joyfully announce the wedding of\n\n' +
-    '*Sneha & Ezaz* 💍\n\n' +
-    '📅 Saturday, 2nd May 2026\n' +
-    '🕛 12:00 Noon\n' +
-    '📍 Katiahat\n\n' +
+    '*Sneha Tabassum & Ezaz Hossain* 💍\n\n' +
+    '🌿 *Day 1 — Haldi Ceremony*\n' +
+    '📅 Friday, 1st May 2026 · 3:00 PM\n\n' +
+    '💍 *Day 2 — Nikah (Marriage)*\n' +
+    '📅 Saturday, 2nd May 2026 · 12:00 Noon\n\n' +
+    '🌸 *Day 3 — Reception*\n' +
+    '📅 Sunday, 3rd May 2026 · 12:00 Noon\n\n' +
+    '📍 Katiahat, Wedding Hall & Grounds\n' +
+    '🗺️ https://maps.app.goo.gl/bhq4D6nzBE9Y3qbX7\n\n' +
     'We would be honoured by your presence.\n\n' +
     '👇 View the full invitation:\n' + INVITE_URL
   );
