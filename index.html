@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sneha & Ezaz — Wedding Invitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8d5a3;
+      --gold-dark: #a07830;
+      --rose: #e8b4b8;
+      --rose-deep: #c97b84;
+      --cream: #fdf8f0;
+      --cream-dark: #f5ede0;
+      --brown: #5a3e2b;
+      --text: #3a2a1e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--text);
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+    }
+
+    /* ── Floating Petals ── */
+    .petals-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .petal {
+      position: absolute;
+      top: -60px;
+      width: 18px; height: 18px;
+      border-radius: 60% 40% 60% 40% / 60% 40% 60% 40%;
+      opacity: 0;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      0%   { transform: translateY(0) rotate(0deg) scale(1);   opacity: 0; }
+      10%  { opacity: 0.7; }
+      90%  { opacity: 0.4; }
+      100% { transform: translateY(110vh) rotate(720deg) scale(0.6); opacity: 0; }
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px;
+      background:
+        radial-gradient(ellipse at 20% 0%, rgba(201,168,76,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 100%, rgba(232,180,184,0.25) 0%, transparent 60%),
+        var(--cream);
+      z-index: 1;
+    }
+
+    /* Decorative corner SVG frames */
+    .corner {
+      position: absolute;
+      width: 200px; height: 200px;
+      opacity: 0.55;
+    }
+    .corner-tl { top: 0; left: 0; transform: none; }
+    .corner-tr { top: 0; right: 0; transform: scaleX(-1); }
+    .corner-bl { bottom: 0; left: 0; transform: scaleY(-1); }
+    .corner-br { bottom: 0; right: 0; transform: scale(-1, -1); }
+
+    .bismillah {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      letter-spacing: 0.2em;
+      color: var(--gold-dark);
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.3s forwards;
+    }
+
+    .divider-ornament {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      justify-content: center;
+      margin: 16px 0;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.5s forwards;
+    }
+    .divider-ornament::before,
+    .divider-ornament::after {
+      content: '';
+      display: block;
+      width: 80px; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold));
+    }
+    .divider-ornament::after {
+      background: linear-gradient(to left, transparent, var(--gold));
+    }
+    .divider-ornament span {
+      color: var(--gold);
+      font-size: 1.4rem;
+    }
+
+    .together {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.75rem, 2vw, 0.95rem);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: 10px;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.6s forwards;
+    }
+
+    .names {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(3.5rem, 12vw, 7.5rem);
+      line-height: 1.1;
+      color: var(--brown);
+      text-shadow: 2px 3px 12px rgba(201,168,76,0.25);
+      opacity: 0;
+      animation: fadeUp 1.2s ease 0.8s forwards;
+    }
+    .names .ampersand {
+      color: var(--gold);
+      font-size: 0.75em;
+      vertical-align: middle;
+      display: inline-block;
+      transform: translateY(-4px);
+    }
+
+    .tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 3vw, 1.35rem);
+      color: var(--rose-deep);
+      margin: 18px 0 32px;
+      opacity: 0;
+      animation: fadeUp 1s ease 1s forwards;
+    }
+
+    .date-badge {
+      display: inline-block;
+      border: 2px solid var(--gold);
+      padding: 18px 48px;
+      border-radius: 4px;
+      position: relative;
+      opacity: 0;
+      animation: fadeUp 1s ease 1.2s forwards;
+    }
+    .date-badge::before, .date-badge::after {
+      content: '✦';
+      position: absolute;
+      color: var(--gold);
+      font-size: 0.75rem;
+    }
+    .date-badge::before { top: -8px; left: 50%; transform: translateX(-50%); background: var(--cream); padding: 0 6px; }
+    .date-badge::after  { bottom: -8px; left: 50%; transform: translateX(-50%); background: var(--cream); padding: 0 6px; }
+
+    .date-badge .day-num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      line-height: 1;
+      color: var(--gold-dark);
+      font-weight: 600;
+    }
+    .date-badge .month-year {
+      font-size: clamp(0.85rem, 2.5vw, 1rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--brown);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0;
+      animation: fadeUp 1s ease 2s forwards;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .scroll-arrow {
+      width: 18px; height: 18px;
+      border-right: 1.5px solid var(--gold);
+      border-bottom: 1.5px solid var(--gold);
+      transform: rotate(45deg);
+      animation: bounce 1.5s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: rotate(45deg) translateY(0); }
+      50%       { transform: rotate(45deg) translateY(5px); }
+    }
+
+    /* ── Sections ── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 80px 24px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 5vw, 2.6rem);
+      color: var(--brown);
+      margin-bottom: 20px;
+    }
+
+    .gold-rule {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      justify-content: center;
+      margin: 24px auto;
+    }
+    .gold-rule::before, .gold-rule::after {
+      content: '';
+      display: block;
+      height: 1px;
+      width: 100px;
+      background: linear-gradient(to right, transparent, var(--gold));
+    }
+    .gold-rule::after { background: linear-gradient(to left, transparent, var(--gold)); }
+    .gold-rule span { color: var(--gold); font-size: 1.1rem; }
+
+    /* ── Countdown ── */
+    .countdown-section {
+      background:
+        linear-gradient(135deg, rgba(90,62,43,0.93) 0%, rgba(58,42,30,0.97) 100%);
+      max-width: 100%;
+      padding: 80px 24px;
+      color: var(--cream);
+    }
+    .countdown-section .section-label { color: var(--gold-light); }
+    .countdown-section .section-title { color: var(--gold-light); }
+
+    .countdown-grid {
+      display: flex;
+      justify-content: center;
+      gap: clamp(16px, 4vw, 48px);
+      flex-wrap: wrap;
+      margin-top: 36px;
+    }
+    .countdown-item {
+      min-width: 90px;
+      text-align: center;
+    }
+    .countdown-item .num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1;
+      display: block;
+    }
+    .countdown-item .lbl {
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      opacity: 0.8;
+      margin-top: 6px;
+    }
+    .countdown-sep {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      color: var(--gold);
+      opacity: 0.4;
+      align-self: flex-start;
+      margin-top: 8px;
+    }
+
+    /* ── Photos ── */
+    .photos-section {
+      padding: 80px 24px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .photos-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(24px, 6vw, 80px);
+      margin-top: 48px;
+      flex-wrap: wrap;
+    }
+    .photo-frame {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
+    .photo-ring {
+      position: relative;
+      width: clamp(160px, 28vw, 220px);
+      height: clamp(160px, 28vw, 220px);
+      border-radius: 50%;
+    }
+    /* Spinning gold ring */
+    .photo-ring::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: conic-gradient(
+        var(--gold) 0deg, var(--gold-light) 60deg, var(--gold) 120deg,
+        transparent 120deg, transparent 180deg,
+        var(--gold) 180deg, var(--gold-light) 240deg, var(--gold) 300deg,
+        transparent 300deg, transparent 360deg
+      );
+      animation: spinRing 8s linear infinite;
+    }
+    .photo-ring::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold-light);
+      opacity: 0.5;
+    }
+    @keyframes spinRing {
+      to { transform: rotate(360deg); }
+    }
+    .photo-ring img {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      position: relative;
+      z-index: 1;
+      border: 5px solid var(--cream);
+      box-shadow: 0 8px 32px rgba(90,62,43,0.18);
+    }
+    /* Corner floral accents on frame */
+    .photo-frame .frame-accent {
+      position: absolute;
+      top: -10px; right: -10px;
+      font-size: 1.4rem;
+      color: var(--rose);
+      animation: floatAccent 3s ease-in-out infinite;
+    }
+    .photo-frame .frame-accent-bl {
+      top: auto; bottom: -10px; right: auto; left: -10px;
+      animation-delay: 1.5s;
+    }
+    @keyframes floatAccent {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50%       { transform: translateY(-5px) rotate(10deg); }
+    }
+    .photo-name {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(1.8rem, 5vw, 2.4rem);
+      color: var(--brown);
+    }
+    .photo-role {
+      font-size: 0.72rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: -12px;
+    }
+    .photos-heart {
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      color: var(--rose-deep);
+      animation: heartbeat 1.4s ease-in-out infinite;
+      align-self: center;
+      margin-bottom: 40px;
+    }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      14%  { transform: scale(1.2); }
+      28%  { transform: scale(1); }
+      42%  { transform: scale(1.15); }
+      70%  { transform: scale(1); }
+    }
+
+    /* ── Details cards ── */
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+      margin-top: 48px;
+    }
+    .detail-card {
+      background: var(--cream-dark);
+      border: 1px solid var(--gold-light);
+      border-radius: 8px;
+      padding: 40px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .detail-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(201,168,76,0.15);
+    }
+    .detail-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .detail-card .icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .detail-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold-dark);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .detail-card p {
+      font-size: 1.1rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .detail-card p strong {
+      display: block;
+      font-size: 1.25rem;
+      color: var(--brown);
+      font-weight: 600;
+    }
+
+    /* ── Quote / Message ── */
+    .quote-section {
+      background: linear-gradient(135deg, #fdf0f0 0%, var(--cream) 100%);
+      max-width: 100%;
+      padding: 80px 24px;
+      text-align: center;
+    }
+    blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.2rem, 3.5vw, 1.7rem);
+      color: var(--brown);
+      max-width: 680px;
+      margin: 0 auto 16px;
+      line-height: 1.8;
+      position: relative;
+    }
+    blockquote::before, blockquote::after {
+      content: '"';
+      font-family: 'Great Vibes', cursive;
+      font-size: 5rem;
+      color: var(--rose);
+      position: absolute;
+      line-height: 0;
+      top: 30px;
+    }
+    blockquote::before { left: -20px; }
+    blockquote::after  { content: '"'; right: -20px; bottom: -20px; top: auto; }
+
+    cite {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    /* ── Family ── */
+    .family-section { padding: 80px 24px; }
+    .family-columns {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 24px;
+      align-items: center;
+      margin-top: 48px;
+    }
+    .family-col { text-align: center; }
+    .family-col h3 {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      color: var(--brown);
+      margin-bottom: 14px;
+    }
+    .family-col p {
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.9;
+    }
+    .family-col p .parent {
+      display: block;
+      font-size: 1.05rem;
+      color: var(--brown);
+    }
+    .family-divider {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--gold);
+    }
+    .family-divider span { font-size: 1.5rem; }
+    .family-divider::before, .family-divider::after {
+      content: '';
+      width: 1px; height: 60px;
+      background: linear-gradient(to bottom, transparent, var(--gold));
+    }
+    .family-divider::after { background: linear-gradient(to top, transparent, var(--gold)); }
+
+    /* ── Footer ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      background: #1a0e07;
+      text-align: center;
+      padding: 48px 24px 36px;
+      color: rgba(253,248,240,0.45);
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+    }
+    footer .footer-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.2rem;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .family-columns {
+        grid-template-columns: 1fr;
+      }
+      .family-divider {
+        flex-direction: row;
+        width: 100%;
+      }
+      .family-divider::before, .family-divider::after {
+        width: 80px; height: 1px;
+        background: linear-gradient(to right, transparent, var(--gold));
+      }
+      .family-divider::after { background: linear-gradient(to left, transparent, var(--gold)); }
+      .corner { width: 120px; height: 120px; }
+      blockquote::before { left: 0; }
+      blockquote::after  { right: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Floating petals -->
+<div class="petals-container" id="petals"></div>
+
+<!-- ─────────────── HERO ─────────────── -->
+<div class="hero">
+  <!-- Corner decorations -->
+  <svg class="corner corner-tl" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 10 Q10 100 100 10" stroke="#c9a84c" stroke-width="1.2" fill="none"/>
+    <path d="M10 10 Q60 10 10 60" stroke="#c9a84c" stroke-width="0.8" fill="none"/>
+    <circle cx="10" cy="10" r="3" fill="#c9a84c"/>
+    <circle cx="100" cy="10" r="2" fill="#c9a84c" opacity=".5"/>
+    <circle cx="10" cy="100" r="2" fill="#c9a84c" opacity=".5"/>
+    <!-- Floral motif -->
+    <g transform="translate(38,38)" opacity=".7">
+      <circle cx="0" cy="-14" r="5" fill="#e8b4b8"/>
+      <circle cx="14" cy="0" r="5" fill="#e8b4b8"/>
+      <circle cx="0" cy="14" r="5" fill="#e8b4b8"/>
+      <circle cx="-14" cy="0" r="5" fill="#e8b4b8"/>
+      <circle cx="0" cy="0" r="4" fill="#c9a84c"/>
+    </g>
+    <path d="M5 80 Q20 65 35 80 Q50 95 65 80" stroke="#c9a84c" stroke-width="0.8" fill="none" opacity=".6"/>
+    <path d="M80 5 Q65 20 80 35 Q95 50 80 65" stroke="#c9a84c" stroke-width="0.8" fill="none" opacity=".6"/>
+  </svg>
+  <svg class="corner corner-tr" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 10 Q10 100 100 10" stroke="#c9a84c" stroke-width="1.2" fill="none"/>
+    <path d="M10 10 Q60 10 10 60" stroke="#c9a84c" stroke-width="0.8" fill="none"/>
+    <circle cx="10" cy="10" r="3" fill="#c9a84c"/>
+    <circle cx="100" cy="10" r="2" fill="#c9a84c" opacity=".5"/>
+    <circle cx="10" cy="100" r="2" fill="#c9a84c" opacity=".5"/>
+    <g transform="translate(38,38)" opacity=".7">
+      <circle cx="0" cy="-14" r="5" fill="#e8b4b8"/>
+      <circle cx="14" cy="0" r="5" fill="#e8b4b8"/>
+      <circle cx="0" cy="14" r="5" fill="#e8b4b8"/>
+      <circle cx="-14" cy="0" r="5" fill="#e8b4b8"/>
+      <circle cx="0" cy="0" r="4" fill="#c9a84c"/>
+    </g>
+    <path d="M5 80 Q20 65 35 80 Q50 95 65 80" stroke="#c9a84c" stroke-width="0.8" fill="none" opacity=".6"/>
+    <path d="M80 5 Q65 20 80 35 Q95 50 80 65" stroke="#c9a84c" stroke-width="0.8" fill="none" opacity=".6"/>
+  </svg>
+  <svg class="corner corner-bl" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 10 Q10 100 100 10" stroke="#c9a84c" stroke-width="1.2" fill="none"/>
+    <path d="M10 10 Q60 10 10 60" stroke="#c9a84c" stroke-width="0.8" fill="none"/>
+    <circle cx="10" cy="10" r="3" fill="#c9a84c"/>
+    <circle cx="100" cy="10" r="2" fill="#c9a84c" opacity=".5"/>
+    <circle cx="10" cy="100" r="2" fill="#c9a84c" opacity=".5"/>
+    <g transform="translate(38,38)" opacity=".7">
+      <circle cx="0" cy="-14" r="5" fill="#e8b4b8"/>
+      <circle cx="14" cy="0" r="5" fill="#e8b4b8"/>
+      <circle cx="0" cy="14" r="5" fill="#e8b4b8"/>
+      <circle cx="-14" cy="0" r="5" fill="#e8b4b8"/>
+      <circle cx="0" cy="0" r="4" fill="#c9a84c"/>
+    </g>
+    <path d="M5 80 Q20 65 35 80 Q50 95 65 80" stroke="#c9a84c" stroke-width="0.8" fill="none" opacity=".6"/>
+    <path d="M80 5 Q65 20 80 35 Q95 50 80 65" stroke="#c9a84c" stroke-width="0.8" fill="none" opacity=".6"/>
+  </svg>
+  <svg class="corner corner-br" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 10 Q10 100 100 10" stroke="#c9a84c" stroke-width="1.2" fill="none"/>
+    <path d="M10 10 Q60 10 10 60" stroke="#c9a84c" stroke-width="0.8" fill="none"/>
+    <circle cx="10" cy="10" r="3" fill="#c9a84c"/>
+    <circle cx="100" cy="10" r="2" fill="#c9a84c" opacity=".5"/>
+    <circle cx="10" cy="100" r="2" fill="#c9a84c" opacity=".5"/>
+    <g transform="translate(38,38)" opacity=".7">
+      <circle cx="0" cy="-14" r="5" fill="#e8b4b8"/>
+      <circle cx="14" cy="0" r="5" fill="#e8b4b8"/>
+      <circle cx="0" cy="14" r="5" fill="#e8b4b8"/>
+      <circle cx="-14" cy="0" r="5" fill="#e8b4b8"/>
+      <circle cx="0" cy="0" r="4" fill="#c9a84c"/>
+    </g>
+    <path d="M5 80 Q20 65 35 80 Q50 95 65 80" stroke="#c9a84c" stroke-width="0.8" fill="none" opacity=".6"/>
+    <path d="M80 5 Q65 20 80 35 Q95 50 80 65" stroke="#c9a84c" stroke-width="0.8" fill="none" opacity=".6"/>
+  </svg>
+
+  <p class="bismillah">✦ &nbsp; بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم &nbsp; ✦</p>
+
+  <div class="divider-ornament"><span>❧</span></div>
+
+  <p class="together">Together with their families</p>
+
+  <h1 class="names">
+    Sneha <span class="ampersand">&amp;</span> Ezaz
+  </h1>
+
+  <p class="tagline">invite you to celebrate their union in love</p>
+
+  <div class="date-badge">
+    <div class="day-num">02</div>
+    <div class="month-year">May &nbsp;·&nbsp; 2026</div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</div>
+
+<!-- ─────────────── COUNTDOWN ─────────────── -->
+<div class="countdown-section">
+  <div style="max-width:900px;margin:0 auto;text-align:center;">
+    <p class="section-label reveal">Counting down to the big day</p>
+    <h2 class="section-title reveal">The Clock is Ticking</h2>
+    <div class="gold-rule reveal"><span>✦</span></div>
+    <div class="countdown-grid reveal" id="countdown">
+      <div class="countdown-item"><span class="num" id="days">--</span><span class="lbl">Days</span></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-item"><span class="num" id="hours">--</span><span class="lbl">Hours</span></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-item"><span class="num" id="minutes">--</span><span class="lbl">Minutes</span></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-item"><span class="num" id="seconds">--</span><span class="lbl">Seconds</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────── PHOTOS ─────────────── -->
+<section class="photos-section">
+  <p class="section-label reveal">The happy couple</p>
+  <h2 class="section-title reveal">Bride &amp; Groom</h2>
+  <div class="gold-rule reveal"><span>✦</span></div>
+  <div class="photos-row reveal">
+
+    <!-- Bride -->
+    <div class="photo-frame">
+      <span class="frame-accent">🌸</span>
+      <span class="frame-accent frame-accent-bl">🌿</span>
+      <div class="photo-ring">
+        <img src="photos/bride.jpeg" alt="Sneha"
+             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22220%22 height=%22220%22%3E%3Ccircle cx=%22110%22 cy=%22110%22 r=%22110%22 fill=%22%23f5ede0%22/%3E%3Ccircle cx=%22110%22 cy=%2290%22 r=%2238%22 fill=%22%23e8b4b8%22/%3E%3Cellipse cx=%22110%22 cy=%22175%22 rx=%2260%22 ry=%2245%22 fill=%22%22e8b4b8%22/%3E%3Ctext x=%2250%25%22 y=%2286%25%22 text-anchor=%22middle%22 font-family=%22serif%22 font-size=%2213%22 fill=%22%23a07830%22%3EAdd bride.jpg%3C/text%3E%3C/svg%3E'" />
+      </div>
+      <div class="photo-name">Sneha</div>
+      <div class="photo-role">The Bride</div>
+    </div>
+
+    <!-- Heart -->
+    <div class="photos-heart">♥</div>
+
+    <!-- Groom -->
+    <div class="photo-frame">
+      <span class="frame-accent">🌸</span>
+      <span class="frame-accent frame-accent-bl">🌿</span>
+      <div class="photo-ring">
+        <img src="photos/groom.jpeg" alt="Ezaz"
+             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22220%22 height=%22220%22%3E%3Ccircle cx=%22110%22 cy=%22110%22 r=%22110%22 fill=%22%23f5ede0%22/%3E%3Ccircle cx=%22110%22 cy=%2290%22 r=%2238%22 fill=%22%23c9a84c%22 opacity=%220.4%22/%3E%3Cellipse cx=%22110%22 cy=%22175%22 rx=%2260%22 ry=%2245%22 fill=%22%23c9a84c%22 opacity=%220.3%22/%3E%3Ctext x=%2250%25%22 y=%2286%25%22 text-anchor=%22middle%22 font-family=%22serif%22 font-size=%2213%22 fill=%22%23a07830%22%3EAdd groom.jpg%3C/text%3E%3C/svg%3E'" />
+      </div>
+      <div class="photo-name">Ezaz</div>
+      <div class="photo-role">The Groom</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─────────────── DETAILS ─────────────── -->
+<section>
+  <p class="section-label reveal">Mark your calendar</p>
+  <h2 class="section-title reveal">Wedding Details</h2>
+  <div class="gold-rule reveal"><span>✦</span></div>
+  <p class="reveal" style="font-size:1.1rem;color:#6b5040;font-style:italic;max-width:580px;margin:0 auto;">
+    We are overjoyed to share this special milestone and would be honoured by your presence as we begin our new journey together.
+  </p>
+  <div class="details-grid reveal">
+    <div class="detail-card">
+      <span class="icon">🕛</span>
+      <h3>Ceremony Time</h3>
+      <p><strong>12:00 Noon</strong>Saturday, 2nd May 2026</p>
+    </div>
+    <div class="detail-card">
+      <span class="icon">📍</span>
+      <h3>Venue</h3>
+      <p><strong>Katiahat</strong>Wedding Hall &amp; Grounds</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────── QUOTE ─────────────── -->
+<div class="quote-section">
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="gold-rule reveal"><span>✦</span></div>
+    <blockquote class="reveal">
+      And He placed between you affection and mercy. Indeed in that are signs for a people who give thought.
+    </blockquote>
+    <cite class="reveal">— Quran 30:21</cite>
+    <div class="gold-rule reveal"><span>✦</span></div>
+  </div>
+</div>
+
+<!-- ─────────────── FAMILY ─────────────── -->
+<section class="family-section">
+  <p class="section-label reveal">With blessings of our families</p>
+  <h2 class="section-title reveal">Our Families</h2>
+  <div class="gold-rule reveal"><span>✦</span></div>
+  <div class="family-columns reveal">
+    <div class="family-col">
+      <h3>Sneha</h3>
+      <p>
+        <span class="parent">Daughter of</span>
+        her beloved father &amp; mother
+      </p>
+    </div>
+    <div class="family-divider"><span>❧</span></div>
+    <div class="family-col">
+      <h3>Ezaz</h3>
+      <p>
+        <span class="parent">Son of</span>
+        his beloved father &amp; mother
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─────────────── FOOTER ─────────────── -->
+<footer>
+  <span class="footer-names">Sneha &amp; Ezaz</span>
+  <p>2nd May 2026 &nbsp;·&nbsp; Katiahat</p>
+  <br/>
+  <p style="font-size:0.75rem;opacity:0.4;">Made with ♥ for our special day</p>
+</footer>
+
+<script>
+  /* ── Petals ── */
+  (function() {
+    const colors = ['#e8b4b8','#f7cfd2','#f0d9b5','#fce4ec','#f8bbd0','#ffe0b2'];
+    const container = document.getElementById('petals');
+    for (let i = 0; i < 22; i++) {
+      const p = document.createElement('div');
+      p.className = 'petal';
+      const size = 10 + Math.random() * 14;
+      p.style.cssText = `
+        left: ${Math.random() * 100}%;
+        width: ${size}px; height: ${size}px;
+        background: ${colors[Math.floor(Math.random() * colors.length)]};
+        animation-duration: ${8 + Math.random() * 12}s;
+        animation-delay: ${Math.random() * 10}s;
+        border-radius: ${Math.random() > 0.5 ? '60% 40% 60% 40% / 60% 40% 60% 40%' : '50% 20% 50% 20% / 50% 20% 50% 20%'};
+        opacity: 0;
+      `;
+      container.appendChild(p);
+    }
+  })();
+
+  /* ── Countdown ── */
+  (function() {
+    const target = new Date('2026-05-02T12:00:00');
+    function update() {
+      const now  = new Date();
+      const diff = target - now;
+      if (diff <= 0) {
+        document.getElementById('countdown').innerHTML = '<p style="color:var(--gold-light);font-family:\'Great Vibes\',cursive;font-size:2.5rem;">Today is the Day! 🌸</p>';
+        return;
+      }
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000)  / 60000);
+      const s = Math.floor((diff % 60000)    / 1000);
+      document.getElementById('days').textContent    = String(d).padStart(2,'0');
+      document.getElementById('hours').textContent   = String(h).padStart(2,'0');
+      document.getElementById('minutes').textContent = String(m).padStart(2,'0');
+      document.getElementById('seconds').textContent = String(s).padStart(2,'0');
+    }
+    update();
+    setInterval(update, 1000);
+  })();
+
+  /* ── Scroll reveal ── */
+  (function() {
+    const els = document.querySelectorAll('.reveal');
+    const io  = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    els.forEach(el => io.observe(el));
+  })();
+
+
+</script>
+</body>
+</html>
