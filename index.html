@@ -42,7 +42,8 @@
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--cream);
+      background-color: var(--cream);
+      background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23c9a84c' stroke-width='.35' opacity='.18'%3E%3Ccircle cx='60' cy='60' r='18'/%3E%3Ccircle cx='60' cy='60' r='8'/%3E%3Ccircle cx='60' cy='0'  r='3'/%3E%3Ccircle cx='60' cy='120' r='3'/%3E%3Ccircle cx='0'  cy='60' r='3'/%3E%3Ccircle cx='120' cy='60' r='3'/%3E%3Cline x1='60' y1='42' x2='60' y2='0'/%3E%3Cline x1='60' y1='78' x2='60' y2='120'/%3E%3Cline x1='42' y1='60' x2='0'  y2='60'/%3E%3Cline x1='78' y1='60' x2='120' y2='60'/%3E%3Cpath d='M60 42 Q75 50 78 60 Q75 70 60 78 Q45 70 42 60 Q45 50 60 42Z'/%3E%3C/g%3E%3C/svg%3E");
       color: var(--text);
       font-family: 'Cormorant Garamond', serif;
       overflow-x: hidden;
@@ -76,20 +77,47 @@
       text-align: center; padding: 80px 24px 100px;
       overflow: hidden;
       background:
-        radial-gradient(ellipse 70% 50% at 15%   5%, rgba(201,168,76,.13)   0%, transparent 70%),
-        radial-gradient(ellipse 60% 50% at 85% 100%, rgba(232,180,184,.22)  0%, transparent 70%),
-        radial-gradient(ellipse 80% 60% at 50%  50%, rgba(245,237,224,.60)  0%, transparent 80%),
-        var(--cream);
+        radial-gradient(ellipse 55% 45% at 10%   0%,  rgba(232,180,184,.35) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 92%  10%,  rgba(201,168,76,.18)  0%, transparent 65%),
+        radial-gradient(ellipse 60% 50% at 88% 100%,  rgba(232,180,184,.30) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at  5%  90%,  rgba(201,168,76,.15)  0%, transparent 65%),
+        radial-gradient(ellipse 90% 70% at 50%  50%,  rgba(253,244,232,.80) 0%, transparent 80%),
+        linear-gradient(160deg, #fef9f2 0%, #fdf0f2 40%, #fdf8ec 70%, #fdf8f0 100%);
     }
 
-    /* Mandala ring */
+    /* Bokeh orbs */
+    .bokeh-orb {
+      position: absolute; border-radius: 50%;
+      pointer-events: none; filter: blur(40px); opacity: 0;
+      animation: bokehFloat ease-in-out infinite;
+    }
+    @keyframes bokehFloat {
+      0%,100% { transform: translate(0,0) scale(1);   opacity: 0; }
+      20%      { opacity: 1; }
+      50%      { transform: translate(var(--dx),var(--dy)) scale(1.15); opacity: .7; }
+      80%      { opacity: .5; }
+    }
+
+    /* Mandala rings */
     .hero-mandala {
-      position: absolute; width: min(700px, 95vw); height: min(700px, 95vw);
+      position: absolute; width: min(720px, 96vw); height: min(720px, 96vw);
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+      opacity: .09; pointer-events: none;
+      animation: rotateMandala 100s linear infinite;
+    }
+    .hero-mandala-2 {
+      position: absolute; width: min(500px, 72vw); height: min(500px, 72vw);
       top: 50%; left: 50%; transform: translate(-50%,-50%);
       opacity: .06; pointer-events: none;
-      animation: rotateMandala 90s linear infinite;
+      animation: rotateMandala 60s linear infinite reverse;
     }
     @keyframes rotateMandala { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+    /* Shimmer canvas for sparkles */
+    #hero-sparkle {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 0; opacity: .55;
+    }
 
     /* Corners */
     .corner {
@@ -241,13 +269,18 @@
     ════════════════════════════════ */
     .countdown-bg {
       position: relative; overflow: hidden;
-      background: linear-gradient(140deg, #2e1c0e 0%, #4a2e18 50%, #2e1c0e 100%);
+      background:
+        radial-gradient(ellipse 70% 55% at 15% 50%, rgba(100,50,10,.7)  0%, transparent 70%),
+        radial-gradient(ellipse 60% 55% at 85% 50%, rgba(170,90,20,.45) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 40% at 50%  0%, rgba(201,168,76,.1) 0%, transparent 60%),
+        linear-gradient(140deg, #180b04 0%, #2e1608 40%, #3e2010 70%, #180b04 100%);
       padding: 88px 24px;
     }
     .countdown-bg::before {
-      content: ''; position: absolute; inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='1' fill='%23c9a84c' opacity='.06'/%3E%3Ccircle cx='0' cy='0'   r='1' fill='%23c9a84c' opacity='.06'/%3E%3Ccircle cx='100' cy='0'   r='1' fill='%23c9a84c' opacity='.06'/%3E%3Ccircle cx='0' cy='100'   r='1' fill='%23c9a84c' opacity='.06'/%3E%3Ccircle cx='100' cy='100' r='1' fill='%23c9a84c' opacity='.06'/%3E%3C/svg%3E");
     }
+    #cd-stars { position: absolute; inset: 0; pointer-events: none; }
     .countdown-bg .section-label { color: var(--gold-light); }
     .countdown-bg .section-title { color: var(--gold-light); }
     .countdown-bg .gold-rule span { color: var(--gold-light); }
@@ -461,12 +494,23 @@
     ════════════════════════════════ */
     .quote-bg {
       position: relative; overflow: hidden;
-      background: linear-gradient(160deg, #2e1c0e 0%, #3e2412 40%, #2e1c0e 100%);
+      background:
+        radial-gradient(ellipse 100% 60% at 50% 50%, rgba(80,35,5,.0)  0%, rgba(20,8,2,.95) 100%),
+        linear-gradient(135deg, #120800 0%, #2a1206 30%, #3d1e0a 55%, #2a1206 80%, #120800 100%);
       padding: 100px 24px;
     }
     .quote-bg::before {
-      content: ''; position: absolute; inset: 0; opacity: .05;
-      background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c9a84c' fill-opacity='1' fill-rule='evenodd'%3E%3Ccircle cx='40' cy='40' r='2'/%3E%3C/g%3E%3C/svg%3E");
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      opacity: .07;
+      background: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23c9a84c' stroke-width='.5'%3E%3Ccircle cx='60' cy='60' r='30'/%3E%3Ccircle cx='60' cy='60' r='55'/%3E%3Cline x1='60' y1='5' x2='60' y2='115'/%3E%3Cline x1='5' y1='60' x2='115' y2='60'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .quote-bg::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 50% 40% at 50%  0%, rgba(201,168,76,.12) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 50% 100%, rgba(201,168,76,.10) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 60% at 0%  50%, rgba(232,180,184,.07) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 60% at 100% 50%, rgba(232,180,184,.07) 0%, transparent 70%);
     }
     .quote-inner { max-width: 760px; margin: 0 auto; position: relative; }
     .quote-icon {
@@ -635,6 +679,33 @@
 <div class="hero">
 
   <!-- Background mandala -->
+  <canvas id="hero-sparkle"></canvas>
+
+  <!-- Bokeh orbs -->
+  <div class="bokeh-orb" style="width:320px;height:320px;background:radial-gradient(circle,rgba(232,180,184,.55),transparent 70%);top:-60px;left:-80px;--dx:40px;--dy:50px;animation-duration:12s;animation-delay:0s;"></div>
+  <div class="bokeh-orb" style="width:260px;height:260px;background:radial-gradient(circle,rgba(201,168,76,.35),transparent 70%);top:10%;right:-60px;--dx:-30px;--dy:60px;animation-duration:15s;animation-delay:3s;"></div>
+  <div class="bokeh-orb" style="width:200px;height:200px;background:radial-gradient(circle,rgba(232,180,184,.4),transparent 70%);bottom:5%;left:10%;--dx:50px;--dy:-40px;animation-duration:18s;animation-delay:6s;"></div>
+  <div class="bokeh-orb" style="width:180px;height:180px;background:radial-gradient(circle,rgba(201,168,76,.3),transparent 70%);bottom:15%;right:5%;--dx:-40px;--dy:-30px;animation-duration:14s;animation-delay:2s;"></div>
+  <div class="bokeh-orb" style="width:140px;height:140px;background:radial-gradient(circle,rgba(245,228,192,.5),transparent 70%);top:40%;left:5%;--dx:30px;--dy:20px;animation-duration:20s;animation-delay:8s;"></div>
+
+  <!-- Second counter-rotating mandala -->
+  <svg class="hero-mandala-2" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="250" cy="250" r="230" stroke="#c9a84c" stroke-width=".8" stroke-dasharray="3 8"/>
+    <circle cx="250" cy="250" r="180" stroke="#e8b4b8" stroke-width=".6" stroke-dasharray="2 6"/>
+    <circle cx="250" cy="250" r="130" stroke="#c9a84c" stroke-width=".8" stroke-dasharray="3 8"/>
+    <circle cx="250" cy="250" r="80"  stroke="#e8b4b8" stroke-width=".6" stroke-dasharray="2 6"/>
+    <g stroke="#c9a84c" stroke-width=".5" opacity=".8">
+      <line x1="250" y1="20"  x2="250" y2="480"/>
+      <line x1="20"  y1="250" x2="480" y2="250"/>
+      <line x1="92"  y1="92"  x2="408" y2="408"/>
+      <line x1="408" y1="92"  x2="92"  y2="408"/>
+      <line x1="20"  y1="155" x2="480" y2="345" opacity=".4"/>
+      <line x1="155" y1="20"  x2="345" y2="480" opacity=".4"/>
+      <line x1="480" y1="155" x2="20"  y2="345" opacity=".4"/>
+      <line x1="345" y1="20"  x2="155" y2="480" opacity=".4"/>
+    </g>
+  </svg>
+
   <svg class="hero-mandala" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="250" cy="250" r="240" stroke="#c9a84c" stroke-width="1"/>
     <circle cx="250" cy="250" r="200" stroke="#c9a84c" stroke-width=".5" stroke-dasharray="6 4"/>
@@ -792,6 +863,7 @@
 
 <!-- ═══════════════════════════════ COUNTDOWN ═══════════════════════════════ -->
 <div class="countdown-bg">
+  <canvas id="cd-stars"></canvas>
   <div class="section-wrap" style="padding-top:0;padding-bottom:0;">
     <p class="section-label reveal">Counting down to the big day</p>
     <h2 class="section-title reveal">The Clock is Ticking</h2>
@@ -1128,28 +1200,89 @@
 </footer>
 
 <script>
+  /* Petals */
   (function() {
     const colors = ['#e8b4b8','#f7cfd2','#f5e6c8','#fce4ec','#f8bbd0','#ffe0b2','#ffd7d9'];
-    const shapes = [
-      '60% 40% 60% 40% / 60% 40% 60% 40%',
-      '50% 20% 50% 20% / 50% 20% 50% 20%',
-      '70% 30% 40% 60% / 50% 60% 40% 50%',
-    ];
+    const shapes = ['60% 40% 60% 40% / 60% 40% 60% 40%','50% 20% 50% 20% / 50% 20% 50% 20%','70% 30% 40% 60% / 50% 60% 40% 50%'];
     const c = document.getElementById('petals');
-    for (let i = 0; i < 28; i++) {
+    for (let i = 0; i < 32; i++) {
       const p = document.createElement('div');
       p.className = 'petal';
       const s = 8 + Math.random() * 16;
-      p.style.cssText = `
-        left:${Math.random()*100}%;
-        width:${s}px;height:${s}px;
-        background:${colors[Math.floor(Math.random()*colors.length)]};
-        animation-duration:${9+Math.random()*14}s;
-        animation-delay:${Math.random()*12}s;
-        border-radius:${shapes[Math.floor(Math.random()*shapes.length)]};
-      `;
+      p.style.cssText = `left:${Math.random()*100}%;width:${s}px;height:${s}px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${9+Math.random()*14}s;animation-delay:${Math.random()*12}s;border-radius:${shapes[Math.floor(Math.random()*shapes.length)]};`;
       c.appendChild(p);
     }
+  })();
+
+  /* Hero sparkle canvas */
+  (function() {
+    const canvas = document.getElementById('hero-sparkle');
+    if (!canvas) return;
+    const hero = canvas.parentElement;
+    function resize() { canvas.width = hero.offsetWidth; canvas.height = hero.offsetHeight; }
+    resize(); window.addEventListener('resize', resize);
+    const ctx = canvas.getContext('2d');
+    const sparks = Array.from({length: 55}, () => ({
+      x: Math.random(), y: Math.random(),
+      r: .6 + Math.random() * 1.6,
+      a: Math.random() * Math.PI * 2,
+      speed: .0003 + Math.random() * .0006,
+      opacity: Math.random(),
+      opDir: Math.random() > .5 ? 1 : -1,
+      color: Math.random() > .5 ? '#c9a84c' : '#e8b4b8'
+    }));
+    function drawSparkle(ctx, x, y, r, opacity, color) {
+      ctx.save(); ctx.globalAlpha = opacity * .85;
+      ctx.fillStyle = color;
+      ctx.shadowBlur = 6; ctx.shadowColor = color;
+      for (let i = 0; i < 4; i++) {
+        ctx.save(); ctx.translate(x, y); ctx.rotate(i * Math.PI / 2);
+        ctx.beginPath(); ctx.moveTo(0, -r*2.5); ctx.lineTo(r*.4, 0); ctx.lineTo(0, r*2.5); ctx.lineTo(-r*.4, 0);
+        ctx.closePath(); ctx.fill(); ctx.restore();
+      }
+      ctx.restore();
+    }
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      sparks.forEach(s => {
+        s.a += s.speed;
+        s.opacity += s.opDir * .008;
+        if (s.opacity >= 1 || s.opacity <= 0) { s.opDir *= -1; if (s.opacity < 0) { s.x = Math.random(); s.y = Math.random(); } }
+        drawSparkle(ctx, s.x * canvas.width, s.y * canvas.height, s.r, s.opacity, s.color);
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+  })();
+
+  /* Countdown stars canvas */
+  (function() {
+    const canvas = document.getElementById('cd-stars');
+    if (!canvas) return;
+    const container = canvas.parentElement;
+    function resize() { canvas.width = container.offsetWidth; canvas.height = container.offsetHeight; }
+    resize(); window.addEventListener('resize', resize);
+    const ctx = canvas.getContext('2d');
+    const stars = Array.from({length: 80}, () => ({
+      x: Math.random(), y: Math.random(),
+      r: .3 + Math.random() * 1.2,
+      opacity: Math.random(),
+      opDir: Math.random() > .5 ? 1 : -1,
+      speed: .004 + Math.random() * .008
+    }));
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(s => {
+        s.opacity += s.opDir * s.speed;
+        if (s.opacity >= 1 || s.opacity <= 0) s.opDir *= -1;
+        ctx.save(); ctx.globalAlpha = s.opacity * .7;
+        ctx.fillStyle = '#e8d5a3'; ctx.shadowBlur = 4; ctx.shadowColor = '#c9a84c';
+        ctx.beginPath(); ctx.arc(s.x * canvas.width, s.y * canvas.height, s.r, 0, Math.PI * 2);
+        ctx.fill(); ctx.restore();
+      });
+      requestAnimationFrame(animateStars);
+    }
+    animateStars();
   })();
 
   (function() {
