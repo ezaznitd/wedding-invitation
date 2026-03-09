@@ -4,6 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sneha & Ezaz — Wedding Invitation</title>
+
+  <!-- Open Graph / WhatsApp preview -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://ezaznitd.github.io/wedding-invitation/" />
+  <meta property="og:title"       content="💍 Sneha Tabassum & Ezaz Hossain — Wedding Invitation" />
+  <meta property="og:description" content="Join us for our wedding celebration! 🌿 Haldi · 1st May | 💍 Nikah · 2nd May | 🌸 Reception · 3rd May 2026 · Katiahat" />
+  <meta property="og:image"       content="https://ezaznitd.github.io/wedding-invitation/photos/bride.jpeg" />
+  <meta property="og:image:width"  content="600" />
+  <meta property="og:image:height" content="600" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="💍 Sneha & Ezaz — Wedding Invitation" />
+  <meta name="twitter:description" content="Join us · 1st–3rd May 2026 · Katiahat" />
+  <meta name="twitter:image"       content="https://ezaznitd.github.io/wedding-invitation/photos/bride.jpeg" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
@@ -1165,7 +1179,8 @@
 
   const INVITE_URL = 'https://ezaznitd.github.io/wedding-invitation/';
   const WA_MSG = encodeURIComponent(
-    '🌸 *Wedding Invitation* 🌸\n\n' +
+    '🌸 *Wedding Invitation* 🌸\n' +
+    INVITE_URL + '\n\n' +
     'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم\n\n' +
     'With the blessings of Allah, we joyfully announce the wedding of\n\n' +
     '*Sneha Tabassum & Ezaz Hossain* 💍\n\n' +
@@ -1176,9 +1191,8 @@
     '🌸 *Day 3 — Reception*\n' +
     '📅 Sunday, 3rd May 2026 · 12:00 Noon\n\n' +
     '📍 Katiahat, Wedding Hall & Grounds\n' +
-    '🗺️ https://maps.app.goo.gl/bhq4D6nzBE9Y3qbX7\n\n' +
-    'We would be honoured by your presence.\n\n' +
-    '👇 View the full invitation:\n' + INVITE_URL
+    '🗺️ maps.app.goo.gl/bhq4D6nzBE9Y3qbX7\n\n' +
+    'We would be honoured by your presence. 🤲'
   );
   document.getElementById('waBtn').href = 'https://wa.me/?text=' + WA_MSG;
 
